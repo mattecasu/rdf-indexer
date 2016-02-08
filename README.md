@@ -4,7 +4,7 @@ This is an indexer for RDF content coming from a SPARQL-endpoint.
 
 ## Run
 
-Just run SparqlIndexerTest.
+Configure queries.properties and run SparqlIndexerTest.
 
 ## License
 
