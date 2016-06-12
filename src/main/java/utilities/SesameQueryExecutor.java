@@ -1,29 +1,28 @@
 package utilities;
 
-import static java.lang.Integer.parseInt;
-import static java.util.Optional.empty;
-import static java.util.stream.Collectors.toList;
-import static org.openrdf.query.QueryResults.singleResult;
-
-import java.util.List;
-import java.util.Optional;
-
+import lombok.extern.log4j.Log4j;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
-import org.openrdf.model.Literal;
-import org.openrdf.model.Model;
-import org.openrdf.model.Value;
-import org.openrdf.model.ValueFactory;
-import org.openrdf.model.util.Literals;
-import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.query.GraphQueryResult;
-import org.openrdf.query.QueryResults;
-import org.openrdf.query.TupleQueryResult;
-import org.openrdf.repository.sparql.SPARQLRepository;
+import org.eclipse.rdf4j.model.Literal;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Value;
+import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.util.Literals;
+import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.eclipse.rdf4j.query.GraphQueryResult;
+import org.eclipse.rdf4j.query.QueryResults;
+import org.eclipse.rdf4j.query.TupleQueryResult;
+import org.eclipse.rdf4j.repository.sparql.SPARQLRepository;
 
-import lombok.extern.log4j.Log4j;
+import java.util.List;
+import java.util.Optional;
+
+import static java.lang.Integer.parseInt;
+import static java.util.Optional.empty;
+import static java.util.stream.Collectors.toList;
+import static org.eclipse.rdf4j.query.QueryResults.singleResult;
 
 @Log4j
 public class SesameQueryExecutor implements QueryExecutor {
@@ -77,7 +76,7 @@ public class SesameQueryExecutor implements QueryExecutor {
                     Value obj = st.getObject();
                     Optional<String> langPart = empty();
                     if (Literals.canCreateLiteral(obj) && ((Literal) obj).getDatatype().equals(RDF.LANGSTRING)) {
-                        String lang = ((Literal)obj).getLanguage().orElse("");
+                        String lang = ((Literal) obj).getLanguage().orElse("");
                         langPart = lang.isEmpty() ? Optional.of("_xx") : Optional.of("_" + lang);
                     }
 
