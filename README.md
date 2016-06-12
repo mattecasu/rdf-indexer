@@ -1,6 +1,6 @@
 ## Synopsis
 
-This is an indexer for RDF content coming from a SPARQL-endpoint.
+This is an indexer for RDF content coming from a SPARQL-endpoint.<br/>
 For demo purposes, it shows two implementations, using Apache Jena and RDF4j (Sesame).
 
 ## Run
