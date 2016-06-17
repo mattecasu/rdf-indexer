@@ -4,7 +4,7 @@
 
 	<groupId>epi.projects</groupId>
 	<artifactId>rdf-indexer</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<properties>
