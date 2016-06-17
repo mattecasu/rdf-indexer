@@ -1,15 +1,6 @@
 package utilities;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static java.util.Optional.empty;
-import static java.util.Optional.ofNullable;
-import static org.apache.jena.query.QueryExecutionFactory.sparqlService;
-import static org.apache.jena.shared.PrefixMapping.Extended;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.rdf.model.Model;
@@ -22,9 +13,17 @@ import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 
-import lombok.extern.log4j.Log4j;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-@Log4j
+import static com.google.common.collect.Lists.newArrayList;
+import static java.util.Optional.empty;
+import static java.util.Optional.ofNullable;
+import static org.apache.jena.query.QueryExecutionFactory.sparqlService;
+import static org.apache.jena.shared.PrefixMapping.Extended;
+
+@Slf4j
 public class JenaQueryExecutor implements QueryExecutor {
 
     private String endpoint;

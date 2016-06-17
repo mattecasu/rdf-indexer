@@ -1,6 +1,6 @@
 package utilities;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -24,7 +24,7 @@ import static java.util.Optional.empty;
 import static java.util.stream.Collectors.toList;
 import static org.eclipse.rdf4j.query.QueryResults.singleResult;
 
-@Log4j
+@Slf4j
 public class SesameQueryExecutor implements QueryExecutor {
 
     private String endpoint;
