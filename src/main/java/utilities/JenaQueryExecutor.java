@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
@@ -88,7 +87,7 @@ public class JenaQueryExecutor implements QueryExecutor {
         doc.add(new Field("rdfUri", uri, StringField.TYPE_STORED));
         doc.add(new Field("endpoint", endpoint, TextField.TYPE_STORED));
 
-        model.listStatements(res, (Property) null, (RDFNode) null)
+        model.listStatements(res, null, (RDFNode) null)
                 .forEachRemaining(s -> {
                     String prop = s.getPredicate().getURI();
                     RDFNode obj = s.getObject();
