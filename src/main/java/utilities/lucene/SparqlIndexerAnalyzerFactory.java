@@ -3,11 +3,15 @@ package utilities.lucene;
 import java.util.Map;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.de.GermanAnalyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.es.SpanishAnalyzer;
+import org.apache.lucene.analysis.fr.FrenchAnalyzer;
 import org.apache.lucene.analysis.it.ItalianAnalyzer;
 import org.apache.lucene.analysis.miscellaneous.PerFieldAnalyzerWrapper;
 
 import com.google.common.collect.ImmutableMap;
+import org.apache.lucene.analysis.pt.PortugueseAnalyzer;
 
 public class SparqlIndexerAnalyzerFactory {
 
@@ -15,8 +19,12 @@ public class SparqlIndexerAnalyzerFactory {
 
     public SparqlIndexerAnalyzerFactory() {
         this.analyzerMap = ImmutableMap.<String, Analyzer>builder()
-                .put("rdfs__comment_it", new ItalianAnalyzer())
-                .put("rdfs__comment_en", new EnglishAnalyzer())
+                .put("comment_en", new EnglishAnalyzer())
+                .put("comment_it", new ItalianAnalyzer())
+                .put("comment_fr", new FrenchAnalyzer())
+                .put("comment_de", new GermanAnalyzer())
+                .put("comment_es", new SpanishAnalyzer())
+                .put("comment_pt", new PortugueseAnalyzer())
                 .build();
     }
 
