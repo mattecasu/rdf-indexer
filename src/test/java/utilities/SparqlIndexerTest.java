@@ -14,7 +14,7 @@ public class SparqlIndexerTest {
     private SparqlIndexer sesameIndexer;
     private static final String endpoint = "http://dbpedia.org/sparql";
     private static final String sparqlIndexerPathSesame = "/Users/epi/Desktop/sesameSparqlIndexerIndex";
-    private static QueryConfig queryInstance;
+    private QueryConfig queryInstance;
 
     @Before
     public void setup() throws IOException {
@@ -25,7 +25,6 @@ public class SparqlIndexerTest {
                 queryInstance.getEndpoint(),
                 new SimpleFSDirectory(Paths.get(sparqlIndexerPathSesame)),
                 queryInstance);
-
     }
 
     @Test
