@@ -11,37 +11,25 @@ import utilities.lucene.SparqlIndexer;
 
 public class SparqlIndexerTest {
 
-    private SparqlIndexer jenaIndexer;
     private SparqlIndexer sesameIndexer;
     private static final String endpoint = "http://dbpedia.org/sparql";
-    private static final String sparqlIndexerPathJena = "/Users/epi/Desktop/jenaSparqlIndexerIndex";
     private static final String sparqlIndexerPathSesame = "/Users/epi/Desktop/sesameSparqlIndexerIndex";
-    private static SparqlIndexerQueryInstance queryInstance;
-    private QueryExecutor jenaExecutor;
-    private QueryExecutor sesameExecutor;
+    private static QueryConfig queryInstance;
 
     @Before
     public void setup() throws IOException {
-        queryInstance = new SparqlIndexerQueryInstance(new ClassPathResource("queries.properties"), endpoint);
-        jenaExecutor = new JenaQueryExecutor(queryInstance.getEndpoint(), queryInstance.getVariable());
-        sesameExecutor = new SesameQueryExecutor(queryInstance.getEndpoint(), queryInstance.getVariable());
 
-        jenaIndexer = new SparqlIndexer(
-                queryInstance.getEndpoint(),
-                new SimpleFSDirectory(Paths.get(sparqlIndexerPathJena)),
-                queryInstance,
-                jenaExecutor);
+        queryInstance = new QueryConfig(new ClassPathResource("queries.properties"), endpoint);
+
         sesameIndexer = new SparqlIndexer(
                 queryInstance.getEndpoint(),
                 new SimpleFSDirectory(Paths.get(sparqlIndexerPathSesame)),
-                queryInstance,
-                sesameExecutor);
+                queryInstance);
 
     }
 
     @Test
     public void test() {
-        jenaIndexer.index();
         sesameIndexer.index();
     }
 
