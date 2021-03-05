@@ -65,7 +65,7 @@ public class SparqlIndexer {
         log.info("::: I am using the following SELECT query:\n" + config.getSelectQuery());
 
         SPARQLRepository repo = new SPARQLRepository(endpoint);
-        repo.initialize();
+        repo.init();
 
         try (RepositoryConnection conn = repo.getConnection()) {
 

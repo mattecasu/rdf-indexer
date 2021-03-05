@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.7'
+    implementation 'junit:junit:4.12'
+    implementation 'org.apache.jena:apache-jena-libs:3.17.0'
+    implementation 'com.google.guava:guava:30.1-jre'
+    implementation 'org.apache.lucene:lucene-core:8.8.1'
+    implementation 'org.apache.lucene:lucene-analyzers-common:8.8.1'
+    implementation 'org.eclipse.rdf4j:rdf4j-runtime:3.6.0'
+    implementation 'org.springframework:spring-core:5.3.4'
+    implementation 'org.slf4j:slf4j-simple:1.8.0-beta4'
+    implementation 'org.slf4j:slf4j-api:1.8.0-beta4'
+
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    testCompileOnly 'org.projectlombok:lombok:1.18.16'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+}
+
+group = 'epi.projects'
+version = '1.0-SNAPSHOT'
+description = 'rdf-indexer'
+java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

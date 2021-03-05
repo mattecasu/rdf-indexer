@@ -5,14 +5,11 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
-import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Value;
-import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.Literals;
-import org.eclipse.rdf4j.model.util.Statements;
+import org.eclipse.rdf4j.model.util.Values;
 
 import java.util.Optional;
 
@@ -24,8 +21,6 @@ public class ModelToDocumentTransducer {
 
     public static Optional<Document> translate(Model model, String uri, String endpoint) {
 
-        ValueFactory vf = SimpleValueFactory.getInstance();
-
         if (model.isEmpty()) {
             return Optional.empty();
         }
@@ -35,7 +30,7 @@ public class ModelToDocumentTransducer {
         doc.add(new Field("endpoint", endpoint, TextField.TYPE_STORED));
 
         model
-                .filter(vf.createIRI(uri), null, null)
+                .filter(Values.iri(uri), null, null)
                 .stream()
                 .forEach(st -> {
 

@@ -1,7 +1,7 @@
 package utilities;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.lucene.store.SimpleFSDirectory;
+import org.apache.lucene.store.NIOFSDirectory;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
@@ -25,7 +25,7 @@ public class SparqlIndexerTest {
 
         sesameIndexer = new SparqlIndexer(
                 queryInstance.getEndpoint(),
-                new SimpleFSDirectory(Paths.get(sparqlIndexerPathSesame)),
+                new NIOFSDirectory(Paths.get(sparqlIndexerPathSesame)),
                 queryInstance);
     }
 
