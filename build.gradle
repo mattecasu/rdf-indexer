@@ -2,6 +2,11 @@ plugins {
     id 'java'
 }
 
+group = 'epi.projects'
+version = '1.0-SNAPSHOT'
+description = 'rdf-indexer'
+
+
 repositories {
     mavenLocal()
     maven {
@@ -11,12 +16,11 @@ repositories {
 
 dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
-    implementation 'junit:junit:4.12'
     implementation 'org.apache.jena:apache-jena-libs:4.7.0'
-    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'com.google.guava:guava:32.1.1-jre'
     implementation "org.apache.lucene:lucene-core:${luceneVersion}"
     implementation "org.apache.lucene:lucene-analysis-common:${luceneVersion}"
-    implementation 'org.eclipse.rdf4j:rdf4j-runtime:4.2.3'
+    implementation "org.eclipse.rdf4j:rdf4j-runtime:${rdf4jVersion}"
     implementation 'org.springframework:spring-core:6.0.5'
     implementation 'org.slf4j:slf4j-simple:2.0.6'
     implementation 'org.slf4j:slf4j-api:2.0.6'
@@ -25,8 +29,12 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    // JUnit 5
+    testImplementation "org.junit.jupiter:junit-jupiter:${jUnitVersion}"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
 }
 
-group = 'epi.projects'
-version = '1.0-SNAPSHOT'
-description = 'rdf-indexer'
+tasks.named('test', Test) {
+    useJUnitPlatform()
+}
