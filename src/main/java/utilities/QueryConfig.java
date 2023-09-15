@@ -3,14 +3,19 @@ package utilities;
 import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Optional.ofNullable;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Properties;
 import lombok.Getter;
 import org.springframework.core.io.Resource;
 
 public class QueryConfig {
+
+  private static final ObjectMapper mapper =
+      new ObjectMapper(new YAMLFactory()).findAndRegisterModules();
 
   public static class SparqlIndexerQueries {
 
@@ -29,18 +34,18 @@ public class QueryConfig {
   @Getter private final List<SparqlIndexerQueries> queries = newArrayList();
 
   public QueryConfig(Resource resource, String endpoint) throws IOException {
-    Properties props = new Properties();
-    props.load(resource.getInputStream());
+
+    Map<String, String> props = mapper.readValue(resource.getInputStream(), Map.class);
 
     int i = 1;
-    Optional<String> selectQuery = ofNullable(props.getProperty("selectQuery_" + i));
+    Optional<String> selectQuery = ofNullable(props.get("selectQuery_" + i));
     do {
-      String constructQuery = props.getProperty("constructQuery_" + i);
+      String constructQuery = props.get("constructQuery_" + i);
       this.queries.add(new SparqlIndexerQueries(selectQuery.get(), constructQuery));
       i += 1;
-    } while ((selectQuery = ofNullable(props.getProperty("selectQuery_" + i))).isPresent());
+    } while ((selectQuery = ofNullable(props.get("selectQuery_" + i))).isPresent());
 
     this.endpoint = endpoint;
-    this.variable = props.getProperty("variable");
+    this.variable = props.get("variable");
   }
 }
