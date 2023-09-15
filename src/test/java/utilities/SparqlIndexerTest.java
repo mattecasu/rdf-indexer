@@ -6,22 +6,24 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.store.NIOFSDirectory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.core.io.ClassPathResource;
 import utilities.lucene.SparqlIndexer;
 
 @Slf4j
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SparqlIndexerTest {
 
   private SparqlIndexer sesameIndexer;
   private static final String endpoint = "http://dbpedia.org/sparql";
   private static final String sparqlIndexerPathSesame =
       System.getProperty("user.home") + "/Desktop/sparqlIndexerIndex";
-  private QueryConfig queryInstance;
 
   @BeforeAll
   public void setup() throws IOException {
 
-    queryInstance = new QueryConfig(new ClassPathResource("queries.properties"), endpoint);
+    QueryConfig queryInstance =
+        new QueryConfig(new ClassPathResource("queries.properties"), endpoint);
 
     sesameIndexer =
         new SparqlIndexer(

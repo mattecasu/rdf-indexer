@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="utilities.SparqlIndexerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-03-05T14:05:59" hostname="mbp-di-Matteo.station" time="18.862">
+<testsuite name="utilities.SparqlIndexerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-15T13:36:57" hostname="B-5194.local" time="19.282">
   <properties/>
-  <testcase name="test" classname="utilities.SparqlIndexerTest" time="18.862"/>
+  <testcase name="test()" classname="utilities.SparqlIndexerTest" time="19.282"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[[Test worker] INFO utilities.lucene.SparqlIndexer - ::: I am using the following SELECT query:
 prefix dbp:<http://dbpedia.org/property/> prefix dbpedia:<http://dbpedia.org/resource/> SELECT distinct ?uri WHERE { {select distinct ?uri where {?uri dbp:title dbpedia:Prime_Minister_of_the_United_Kingdom} ORDER BY ?uri } }
@@ -66,7 +66,6 @@ prefix dbp:<http://dbpedia.org/property/> prefix dbpedia:<http://dbpedia.org/res
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/1987_United_Kingdom_general_election
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/1992_United_Kingdom_general_election
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/1997_United_Kingdom_general_election
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/1997_United_Kingdom_general_election_in_Edinburgh
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/2001_United_Kingdom_general_election
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/2005_United_Kingdom_general_election
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/2005_United_Kingdom_general_election_in_Edinburgh
@@ -77,11 +76,10 @@ prefix dbp:<http://dbpedia.org/property/> prefix dbpedia:<http://dbpedia.org/res
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Archibald_Primrose,_5th_Earl_of_Rosebery
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Arthur_Balfour
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Asquith_coalition_ministry
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Augustus_FitzRoy,_3rd_Duke_of_Grafton
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Bonar_Law
+[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Boris_Johnson
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Candidates_in_the_2017_United_Kingdom_general_election
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Charles_Grey,_2nd_Earl_Grey
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Charles_Watson-Wentworth,_2nd_Marquess_of_Rockingham
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Clement_Attlee
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/David_Cameron
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/David_Lloyd_George
@@ -90,9 +88,7 @@ prefix dbp:<http://dbpedia.org/property/> prefix dbpedia:<http://dbpedia.org/res
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Edward_Smith-Stanley,_14th_Earl_of_Derby
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/F._J._Robinson,_1st_Viscount_Goderich
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/February_1974_United_Kingdom_general_election
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Frederick_North,_Lord_North
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/George_Canning
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/George_Grenville
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/George_Hamilton-Gordon,_4th_Earl_of_Aberdeen
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Gordon_Brown
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/H._H._Asquith
@@ -101,10 +97,9 @@ prefix dbp:<http://dbpedia.org/property/> prefix dbpedia:<http://dbpedia.org/res
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Henry_Addington
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Henry_Campbell-Bannerman
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Henry_John_Temple,_3rd_Viscount_Palmerston
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Henry_Pelham
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/James_Callaghan
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/January_1910_United_Kingdom_general_election
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/John_Stuart,_3rd_Earl_of_Bute
+[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Liz_Truss
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Neville_Chamberlain
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Next_United_Kingdom_general_election
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/October_1974_United_Kingdom_general_election
@@ -116,18 +111,11 @@ prefix dbp:<http://dbpedia.org/property/> prefix dbpedia:<http://dbpedia.org/res
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Results_breakdown_of_the_2019_United_Kingdom_general_election
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Robert_Jenkinson,_2nd_Earl_of_Liverpool
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Robert_Peel
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Robert_Walpole
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Spencer_Compton,_1st_Earl_of_Wilmington
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Spencer_Perceval
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Thomas_Pelham-Holles,_1st_Duke_of_Newcastle
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Tony_Blair
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/William_Cavendish,_4th_Duke_of_Devonshire
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/William_Cavendish-Bentinck,_3rd_Duke_of_Portland
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/William_Ewart_Gladstone
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/William_Grenville,_1st_Baron_Grenville
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/William_Lamb,_2nd_Viscount_Melbourne
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/William_Petty,_2nd_Earl_of_Shelburne
-[Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/William_Pitt,_1st_Earl_of_Chatham
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/William_Pitt_the_Younger
 [Test worker] INFO utilities.lucene.SparqlIndexer - ::: Getting the RDF for http://dbpedia.org/resource/Winston_Churchill
 ]]></system-err>

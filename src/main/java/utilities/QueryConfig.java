@@ -1,7 +1,7 @@
 package utilities;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Optional.ofNullable;
-import static org.apache.jena.ext.com.google.common.collect.Lists.newArrayList;
 
 import java.io.IOException;
 import java.util.List;
