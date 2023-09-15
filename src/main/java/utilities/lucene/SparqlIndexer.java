@@ -1,5 +1,11 @@
 package utilities.lucene;
 
+import static java.util.stream.Collectors.toList;
+import static org.apache.lucene.index.IndexWriterConfig.OpenMode.CREATE;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
@@ -16,130 +22,117 @@ import utilities.ModelToDocumentTransducer;
 import utilities.QueryConfig;
 import utilities.QueryConfig.SparqlIndexerQueries;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
-import static org.apache.lucene.index.IndexWriterConfig.OpenMode.CREATE;
-
 @Slf4j
 public class SparqlIndexer {
 
-    private static int skip = 10000;
-    private final String endpoint;
-    private final IndexWriter iwriter;
-    private final QueryConfig queryInstance;
+  private static int skip = 10000;
+  private final String endpoint;
+  private final IndexWriter iwriter;
+  private final QueryConfig queryInstance;
 
-    public SparqlIndexer(
-            String endpoint,
-            Directory indexDirectory,
-            QueryConfig queryInstance) throws IOException {
+  public SparqlIndexer(String endpoint, Directory indexDirectory, QueryConfig queryInstance)
+      throws IOException {
 
-        this.endpoint = endpoint;
-        this.queryInstance = queryInstance;
+    this.endpoint = endpoint;
+    this.queryInstance = queryInstance;
 
-        Analyzer analyzer = new SparqlIndexerAnalyzerFactory()
-                .getSparqlIndexerAnalyzer();
-        IndexWriterConfig config = new IndexWriterConfig(analyzer)
-                .setOpenMode(CREATE);
+    Analyzer analyzer = new SparqlIndexerAnalyzerFactory().getSparqlIndexerAnalyzer();
+    IndexWriterConfig config = new IndexWriterConfig(analyzer).setOpenMode(CREATE);
 
-        iwriter = new IndexWriter(indexDirectory, config);
+    iwriter = new IndexWriter(indexDirectory, config);
+  }
+
+  public void index() {
+
+    queryInstance.getQueries().forEach(this::index);
+
+    try {
+      iwriter.commit();
+      iwriter.close();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    public void index() {
+  private void index(SparqlIndexerQueries config) {
 
-        queryInstance.getQueries().forEach(queryConfig -> index(queryConfig));
+    log.info("::: I am using the following SELECT query:\n" + config.getSelectQuery());
 
-        try {
-            iwriter.commit();
-            iwriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    SPARQLRepository repo = new SPARQLRepository(endpoint);
+    repo.init();
+
+    try (RepositoryConnection conn = repo.getConnection()) {
+
+      int offset = 0;
+
+      TupleQueryResult ress = null;
+
+      while (ress == null || ress.hasNext()) {
+
+        log.info("Taking " + skip + " tuples..");
+
+        log.debug("Offset: " + offset);
+        log.debug("Limit: " + skip);
+
+        if (ress == null) {
+          ress =
+              QueryResults.distinctResults(
+                  conn.prepareTupleQuery(increasePagination(config.getSelectQuery(), offset))
+                      .evaluate());
         }
-    }
 
+        if (ress != null) {
 
-    private void index(SparqlIndexerQueries config) {
+          List<String> uris =
+              QueryResults.stream(ress)
+                  .map(x -> x.getValue(queryInstance.getVariable()).stringValue())
+                  .collect(toList());
 
-        log.info("::: I am using the following SELECT query:\n" + config.getSelectQuery());
-
-        SPARQLRepository repo = new SPARQLRepository(endpoint);
-        repo.init();
-
-        try (RepositoryConnection conn = repo.getConnection()) {
-
-            int offset = 0;
-
-            TupleQueryResult ress = null;
-
-            while (ress == null || ress.hasNext()) {
-
-                log.info("Taking " + skip + " tuples..");
-
-                log.debug("Offset: " + offset);
-                log.debug("Limit: " + skip);
-
-                if (ress == null) {
-                    ress = QueryResults.distinctResults(conn
-                            .prepareTupleQuery(increasePagination(config.getSelectQuery(), offset))
-                            .evaluate());
-                }
-
-                if (ress != null) {
-
-                    List<String> uris = QueryResults.stream(ress)
-                            .map(x -> x.getValue(queryInstance.getVariable()).stringValue())
-                            .collect(toList());
-
-                    getAndIndex(uris, config.getConstructQuery(), conn);
-
-                }
-                offset += skip;
-            }
-
+          getAndIndex(uris, config.getConstructQuery(), conn);
         }
-        repo.shutDown();
+        offset += skip;
+      }
     }
+    repo.shutDown();
+  }
 
-    private static String increasePagination(String basicQuery, int offset) {
-        return basicQuery
-                .concat("\noffset ")
-                .concat(String.valueOf(offset))
-                .concat("\n")
-                .concat("limit ")
-                .concat(String.valueOf(skip));
-    }
+  private static String increasePagination(String basicQuery, int offset) {
+    return basicQuery
+        .concat("\noffset ")
+        .concat(String.valueOf(offset))
+        .concat("\n")
+        .concat("limit ")
+        .concat(String.valueOf(skip));
+  }
 
-    private void getAndIndex(List<String> uris, String constructQueryTemplate, RepositoryConnection conn) {
+  private void getAndIndex(
+      List<String> uris, String constructQueryTemplate, RepositoryConnection conn) {
 
-        uris.forEach(uri -> {
+    uris.forEach(
+        uri -> {
+          String constructQuery =
+              constructQueryTemplate.replaceAll(
+                  "\\?" + queryInstance.getVariable(), "<" + uri.replace("$", "\\$") + ">");
 
-            String constructQuery = constructQueryTemplate
-                    .replaceAll("\\?" + queryInstance.getVariable(),
-                            "<" + uri.replace("$", "\\$") + ">"
-                    );
+          log.info("::: Getting the RDF for " + uri);
+          Optional<Document> maybeDoc = makeConstruct(uri, constructQuery, conn);
 
-            log.info("::: Getting the RDF for " + uri);
-            Optional<Document> maybeDoc = makeConstruct(uri, constructQuery, conn);
-
-            if (maybeDoc.isPresent()) {
-                try {
-                    iwriter.addDocument(maybeDoc.get());
-                } catch (IOException e) {
-                    log.error(e.getMessage());
-                }
+          if (maybeDoc.isPresent()) {
+            try {
+              iwriter.addDocument(maybeDoc.get());
+            } catch (IOException e) {
+              log.error(e.getMessage());
             }
+          }
         });
-    }
+  }
 
-    private Optional<Document> makeConstruct(String uri, String constructQuery, RepositoryConnection conn) {
+  private Optional<Document> makeConstruct(
+      String uri, String constructQuery, RepositoryConnection conn) {
 
-        GraphQueryResult result = conn.prepareGraphQuery(constructQuery).evaluate();
-        Model model = QueryResults.asModel(result);
+    GraphQueryResult result = conn.prepareGraphQuery(constructQuery).evaluate();
+    Model model = QueryResults.asModel(result);
 
-        return ModelToDocumentTransducer.translate(model, uri, endpoint);
-
-    }
-
+    return ModelToDocumentTransducer.translate(model, uri, endpoint);
+  }
 }
