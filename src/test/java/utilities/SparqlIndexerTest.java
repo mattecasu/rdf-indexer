@@ -23,7 +23,7 @@ public class SparqlIndexerTest {
   public void setup() throws IOException {
 
     QueryConfig queryInstance =
-        new QueryConfig(new ClassPathResource("queries.properties"), endpoint);
+        new QueryConfig(new ClassPathResource("queries.yaml"), endpoint);
 
     sesameIndexer =
         new SparqlIndexer(

@@ -5,7 +5,7 @@ Using RDF4j (Sesame).
 
 ## Run
 
-Configure queries.properties and run SparqlIndexerTest.
+Configure queries.yaml and run SparqlIndexerTest.
 
 ## License
 
