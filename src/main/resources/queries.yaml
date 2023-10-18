@@ -4,11 +4,9 @@ selectQuery_1: |
 
     SELECT distinct ?uri
     WHERE {
-      {select distinct ?uri
-      where {?uri dbp:title dbpedia:Prime_Minister_of_the_United_Kingdom}
-      ORDER BY ?uri
-      }
+        ?uri dbp:title dbpedia:Prime_Minister_of_the_United_Kingdom.
     }
+    ORDER BY ?uri
 constructQuery_1: |
     prefix rdfs:<http://www.w3.org/2000/01/rdf-schema#>
     prefix dbo:<http://dbpedia.org/ontology/>
