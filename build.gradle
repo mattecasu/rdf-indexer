@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "io.freefair.lombok" version "8.4"
 }
 
 group = 'epi.projects'
@@ -8,32 +9,37 @@ description = 'rdf-indexer'
 
 
 repositories {
-    mavenLocal()
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
-    }
+    mavenCentral()
 }
 
-dependencies {
-    implementation "org.apache.commons:commons-lang3:${commonsLangVersion}"
-    implementation "org.apache.jena:apache-jena-libs:${jenaVersion}"
-    implementation "com.google.guava:guava:${guavaVersion}"
-    implementation "org.apache.lucene:lucene-core:${luceneVersion}"
-    implementation "org.apache.lucene:lucene-analysis-common:${luceneVersion}"
-    implementation "org.apache.lucene:lucene-backward-codecs:${luceneVersion}"
-    implementation "org.eclipse.rdf4j:rdf4j-runtime:${rdf4jVersion}"
-    implementation "org.springframework:spring-core:${springVersion}"
-    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonVersion}"
-    implementation "org.slf4j:slf4j-simple:${slf4jVersion}"
-    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+project.ext.versions = [
+        lombokVersion     : "1.18.28",
+        luceneVersion     : "9.7.0",
+        jUnitVersion      : "5.10.0",
+        rdf4jVersion      : "4.3.6",
+        slf4jVersion      : "2.0.9",
+        guavaVersion      : "32.1.2-jre",
+        jenaVersion       : "4.9.0",
+        commonsLangVersion: "3.13.0",
+        springVersion     : "6.0.11",
+        jacksonVersion    : "2.15.2"
+]
 
-    implementation "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    testImplementation "org.projectlombok:lombok:${lombokVersion}"
-    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+dependencies {
+    implementation "org.apache.commons:commons-lang3:${versions.commonsLangVersion}"
+    implementation "org.apache.jena:apache-jena-libs:${versions.jenaVersion}"
+    implementation "com.google.guava:guava:${versions.guavaVersion}"
+    implementation "org.apache.lucene:lucene-core:${versions.luceneVersion}"
+    implementation "org.apache.lucene:lucene-analysis-common:${versions.luceneVersion}"
+    implementation "org.apache.lucene:lucene-backward-codecs:${versions.luceneVersion}"
+    implementation "org.eclipse.rdf4j:rdf4j-runtime:${versions.rdf4jVersion}"
+    implementation "org.springframework:spring-core:${versions.springVersion}"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${versions.jacksonVersion}"
+    implementation "org.slf4j:slf4j-simple:${versions.slf4jVersion}"
+    implementation "org.slf4j:slf4j-api:${versions.slf4jVersion}"
 
     // JUnit 5
-    testImplementation "org.junit.jupiter:junit-jupiter:${jUnitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter:${versions.jUnitVersion}"
     testRuntimeOnly "org.junit.platform:junit-platform-launcher"
 }
 
