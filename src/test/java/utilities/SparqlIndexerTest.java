@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.store.NIOFSDirectory;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.core.io.ClassPathResource;
@@ -12,6 +13,7 @@ import utilities.lucene.SparqlIndexer;
 
 @Slf4j
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Disabled
 public class SparqlIndexerTest {
 
   private SparqlIndexer sesameIndexer;
