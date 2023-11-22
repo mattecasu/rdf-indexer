@@ -33,7 +33,7 @@ dependencies {
     implementation "org.apache.lucene:lucene-core:${versions.luceneVersion}"
     implementation "org.apache.lucene:lucene-analysis-common:${versions.luceneVersion}"
     implementation "org.apache.lucene:lucene-backward-codecs:${versions.luceneVersion}"
-    implementation "org.eclipse.rdf4j:rdf4j-runtime:${rdf4jVersion}"
+    implementation "org.eclipse.rdf4j:rdf4j-runtime:$rdf4jVersion"
     implementation "org.springframework:spring-core:${versions.springVersion}"
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${versions.jacksonVersion}"
     implementation "org.slf4j:slf4j-simple:${versions.slf4jVersion}"
