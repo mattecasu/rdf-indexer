@@ -21,7 +21,7 @@ def slf4jVersion = "2.0.11"
 def guavaVersion = "33.0.0-jre"
 def jenaVersion = "4.10.0"
 def commonsLangVersion = "3.14.0"
-def springVersion = "6.1.2"
+def springVersion = "6.1.3"
 def jacksonVersion = "2.16.1"
 
 dependencies {
