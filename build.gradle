@@ -22,7 +22,7 @@ def guavaVersion = "33.2.1-jre"
 def jenaVersion = "5.0.0"
 def commonsLangVersion = "3.14.0"
 def springVersion = "6.1.6"
-def jacksonVersion = "2.17.1"
+def jacksonVersion = "2.17.2"
 
 dependencies {
     implementation "org.apache.commons:commons-lang3:${commonsLangVersion}"
