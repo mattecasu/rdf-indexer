@@ -16,6 +16,6 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v3
       - name: test with Gradle
-        uses: gradle/actions/gradle-build@v3
+        uses: gradle/actions/setup-gradle@v3
         with:
           arguments: test
