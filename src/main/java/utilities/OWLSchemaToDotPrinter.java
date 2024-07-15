@@ -237,10 +237,10 @@ public class OWLSchemaToDotPrinter {
 
   public static void main(String... args) throws IOException {
 
-    String folder = "/Users/epi/Desktop/SI/Platts/";
-    String inFile = folder + "platts_model.ttl";
-    // String outFile = inFile + ".dot";
-    String outFile = folder + "plattsModel.dot";
+    String home = System.getProperty("user.home");
+    String folder = home + "/Desktop/folder/";
+    String inFile = folder + "file.ttl";
+    String outFile = folder + "file.dot";
 
     OWLSchemaToDotPrinter printer =
         new OWLSchemaToDotPrinter(
