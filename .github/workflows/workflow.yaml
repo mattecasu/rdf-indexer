@@ -17,4 +17,5 @@ jobs:
         uses: gradle/actions/wrapper-validation@v3
       - name: test with Gradle
         uses: gradle/actions/setup-gradle@v3
-      - run: ./gradlew test
+        with:
+          argument: test
