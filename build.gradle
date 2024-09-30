@@ -15,7 +15,7 @@ repositories {
 // only var-assignment method recognised by Dependabot,
 // see https://github.com/dependabot/dependabot-core/issues/1618
 def luceneVersion = "9.11.1"
-def jUnitVersion = "5.10.3"
+def jUnitVersion = "5.11.1"
 def rdf4jVersion = "5.0.2"
 def slf4jVersion = "2.0.13"
 def guavaVersion = "33.2.1-jre"
