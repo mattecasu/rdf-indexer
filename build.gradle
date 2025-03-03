@@ -17,7 +17,7 @@ repositories {
 def luceneVersion = "10.1.0"
 def jUnitVersion = "5.12.0"
 def rdf4jVersion = "5.1.2"
-def slf4jVersion = "2.0.16"
+def slf4jVersion = "2.0.17"
 def guavaVersion = "33.4.0-jre"
 def jenaVersion = "5.3.0"
 def springVersion = "6.2.3"
