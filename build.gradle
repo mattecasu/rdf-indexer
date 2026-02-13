@@ -16,7 +16,7 @@ repositories {
 // see https://github.com/dependabot/dependabot-core/issues/1618
 def luceneVersion = "10.2.0"
 def jUnitVersion = "5.12.2"
-def rdf4jVersion = "5.1.2"
+def rdf4jVersion = "5.2.0"
 def slf4jVersion = "2.0.17"
 def guavaVersion = "33.4.8-jre"
 def jenaVersion = "5.3.0"
